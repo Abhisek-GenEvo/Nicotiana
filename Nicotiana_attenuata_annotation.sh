@@ -159,12 +159,9 @@ gffread NA_Braker_longest_100_TEfiltered.gff -g /lustre/project/m2_jgu-evoltroph
 #SBATCH --mail-user=achakrab@uni-mainz.de
 
 ## Load all necessary modules if needed
-module load lib/zstd/1.5.0-GCCcore-11.2.0
 module load bio/BUSCO/5.4.3-foss-2021b
 busco -f -m genome --offline --download_path /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/busco_downloads -i Natt_genome.fasta -o Natt_Solanales_genome -l solanales_odb10 -c 20
-busco -f -m genome --offline --download_path /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/busco_downloads -i Nobt_genome.fasta -o Nobt_Solanales_genome -l solanales_odb10 -c 20
 busco -f -m proteins --offline --download_path /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/busco_downloads -i Natt_aa.fasta -o Natt_Solanales_proteome -l solanales_odb10 -c 20
-busco -f -m proteins --offline --download_path /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/busco_downloads -i Nobt_aa.fasta -o Nobt_Solanales_proteome -l solanales_odb10 -c 20
 
 
 
