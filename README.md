@@ -4,10 +4,10 @@ Codes were used in the MOGON II cluster (Johannes Gutenberg University Mainz, Ge
 
 Explanation of Major Steps (in brief) for Nicotiana attenuata (NA):
 
-BRAKER3: Predict genes using RNA-Seq reads and protein evidence.
-Filtering: Remove short and TE-contaminated gene models.
-BUSCO: Assess completeness of genome and gene models.
-LTR Assembly Index (LAI): Assess genome assembly quality.
+1. BRAKER3: Predict genes using RNA-Seq reads and protein evidence.
+2. Filtering: Remove short and TE-contaminated gene models.
+3. BUSCO: Assess completeness of genome and gene models.
+4. LTR Assembly Index (LAI): Assess genome assembly quality.
 
 Explanation of Major Steps (in brief) for Nicotiana obtusifolia (NO):
 
