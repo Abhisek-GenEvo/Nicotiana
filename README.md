@@ -11,8 +11,8 @@ Explanation of Major Steps (in brief) for Nicotiana attenuata (NA):
 
 Explanation of Major Steps (in brief) for Nicotiana obtusifolia (NO):
 
-BRAKER3 (two rounds): Predict genes using RNA-Seq reads and protein evidence. One round with only Iso-seq data (RNA-Seq) and one round with only Illumina data (RNA-Seq).
-TSEBRA: Merge the results obtained from two separate BRAKER3 runs for a refined gene set.
-Filtering: Remove short and TE-contaminated gene models.
-BUSCO: Assess completeness of genome and gene models.
-LTR Assembly Index (LAI): Assess genome assembly quality.
+1. BRAKER3 (two rounds): Predict genes using RNA-Seq reads and protein evidence. One round with only Iso-seq data (RNA-Seq) and one round with only Illumina data (RNA-Seq).
+2. TSEBRA: Merge the results obtained from two separate BRAKER3 runs for a refined gene set.
+3. Filtering: Remove short and TE-contaminated gene models.
+4. BUSCO: Assess completeness of genome and gene models.
+5. LTR Assembly Index (LAI): Assess genome assembly quality.
