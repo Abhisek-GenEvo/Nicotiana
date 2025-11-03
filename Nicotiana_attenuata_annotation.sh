@@ -139,7 +139,7 @@ awk '{if ($5 > 0.5) print $2}' NA_TE_prop.out > NA_gene_list.TE_gt_50perc.list
 module load bio/AGAT/1.1.0-GCC-11.2.0
 agat_sp_filter_feature_from_kill_list.pl --gff NA_braker_longest_100.gff --kill_list NA_gene_list.TE_gt_50perc.list -o NA_Braker_longest_100_TEfiltered.gff
 source /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/ALL_SOFTWARES_anaconda3/bin/activate
-gffread NA_Braker_longest_100_TEfiltered.gff -g /lustre/project/m2_jgu-evoltroph/achakrab/NA_genome/02_Assembly_files/NA_genome.fasta -x NA_CDS.fasta -y NA_aa.fasta
+gffread NA_Braker_longest_100_TEfiltered.gff -g /lustre/project/m2_jgu-evoltroph/achakrab/NA_genome/02_Assembly_files/NA_genome.fasta -x Natt_CDS.fasta -y Natt_aa.fasta
 
 ########################################################BUSCO evaluation
 
