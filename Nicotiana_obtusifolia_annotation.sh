@@ -121,6 +121,7 @@ braker.pl --genome=/lustre/project/m2_jgu-evoltroph/achakrab/NO_genome/02_Assemb
 
 ## Load all necessary modules if needed
 /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/TSEBRA/bin/tsebra.py -g braker_run1.gtf,braker_run2.gtf -c /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/TSEBRA/config/long_reads.cfg -e hintsfile_run1.gff,hintsfile_run2.gff -o NO_merged_TSEBRA.gtf
+/lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/TSEBRA/bin/rename_gtf.py --gtf NO_merged_TSEBRA.gtf --translation_tab NO_translation.tab --out NO_TSEBRA_renamed.gtf
 
 ########################################################Filtering using AGAT
 
@@ -141,8 +142,8 @@ braker.pl --genome=/lustre/project/m2_jgu-evoltroph/achakrab/NO_genome/02_Assemb
 
 ## Load all necessary modules if needed
 module load bio/AGAT/1.1.0-GCC-11.2.0
-agat_convert_sp_gxf2gxf.pl -g braker.gtf -o braker.gff
-agat_sp_keep_longest_isoform.pl -gff braker.gff -o NO_braker_longest.gff
+agat_convert_sp_gxf2gxf.pl -g NO_TSEBRA_renamed.gtf -o NO_TSEBRA_renamed.gff
+agat_sp_keep_longest_isoform.pl -gff NO_TSEBRA_renamed.gff -o NO_braker_longest.gff
 agat_sp_filter_gene_by_length.pl --gff NO_braker_longest.gff --size 99 --test ">" -o NO_braker_longest_100.gff
 
 ########################################################Extraction of CDS
@@ -164,7 +165,7 @@ agat_sp_filter_gene_by_length.pl --gff NO_braker_longest.gff --size 99 --test ">
 
 ## Load all necessary modules if needed
 source /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/ALL_SOFTWARES_anaconda3/bin/activate
-gffread NA_braker_longest_100.gff -g /lustre/project/m2_jgu-evoltroph/achakrab/NO_genome/02_Assembly_files/NO_genome.fasta -x Longest_isoforms_CDS.fasta
+gffread NO_braker_longest_100.gff -g /lustre/project/m2_jgu-evoltroph/achakrab/NO_genome/02_Assembly_files/NO_genome.fasta -x Longest_isoforms_CDS.fasta
 
 ########################################################Run RepeatMasker on extracted CDS
 
@@ -191,8 +192,8 @@ RepeatMasker -pa 20 -xsmall -gff -lib rep_lib.fasta Longest_isoforms_CDS.fasta
 
 #!/bin/bash
 
-#SBATCH -J NA_Filtering            # Job name
-#SBATCH -o NA_Filtering.%j.out       # Specify stdout output file (%j expands to jobId)
+#SBATCH -J NO_Filtering            # Job name
+#SBATCH -o NO_Filtering.%j.out       # Specify stdout output file (%j expands to jobId)
 #SBATCH -p devel                   # Queue name 'smp' or 'parallel' on Mogon II
 #SBATCH -n 1                     # Total number of tasks, here explicitly 1
 #SBATCH -c 10                    # Total number of cores for the single task
@@ -210,14 +211,14 @@ awk '{if ($5 > 0.5) print $2}' NO_TE_prop.out > NO_gene_list.TE_gt_50perc.list
 module load bio/AGAT/1.1.0-GCC-11.2.0
 agat_sp_filter_feature_from_kill_list.pl --gff NO_braker_longest_100.gff --kill_list NO_gene_list.TE_gt_50perc.list -o NO_Braker_longest_100_TEfiltered.gff
 source /lustre/project/m2_jgu-evoltroph/achakrab/SOFTWARES/ALL_SOFTWARES_anaconda3/bin/activate
-gffread NO_Braker_longest_100_TEfiltered.gff -g /lustre/project/m2_jgu-evoltroph/achakrab/NO_genome/02_Assembly_files/NO_genome.fasta -x NO_CDS.fasta -y NO_aa.fasta
+gffread NO_Braker_longest_100_TEfiltered.gff -g /lustre/project/m2_jgu-evoltroph/achakrab/NO_genome/02_Assembly_files/NO_genome.fasta -x Nobt_CDS.fasta -y Nobt_aa.fasta
 
 ########################################################BUSCO evaluation
 
 #!/bin/bash
 
-#SBATCH -J busco_Nicotiana            # Job name
-#SBATCH -o busco_Nicotiana.%j.out       # Specify stdout output file (%j expands to jobId)
+#SBATCH -J busco_Nobt            # Job name
+#SBATCH -o busco_Nobt.%j.out       # Specify stdout output file (%j expands to jobId)
 #SBATCH -p smp                   # Queue name 'smp' or 'parallel' on Mogon II
 #SBATCH -n 1                     # Total number of tasks, here explicitly 1
 #SBATCH -c 20                    # Total number of cores for the single task
