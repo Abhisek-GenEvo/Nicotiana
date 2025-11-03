@@ -1,1 +1,18 @@
-This repository will contain the scripts used for the ongoing project - "Chromosome-level genome assemblies of Nicotiana attenuata and Nicotiana obtusifolia".
+This repository archives codes that were used in the Nicotiana attenuata and Nicotiana obtusifolia genome assembly and gene annotation project.
+
+Codes were used in the MOGON II cluster (Johannes Gutenberg University Mainz, Germany).
+
+Explanation of Major Steps (in brief) for Nicotiana attenuata (NA):
+
+BRAKER3: Predict genes using RNA-Seq reads and protein evidence.
+Filtering: Remove short and TE-contaminated gene models.
+BUSCO: Assess completeness of genome and gene models.
+LTR Assembly Index (LAI): Assess genome assembly quality.
+
+Explanation of Major Steps (in brief) for Nicotiana obtusifolia (NO):
+
+BRAKER3 (two rounds): Predict genes using RNA-Seq reads and protein evidence. One round with only Iso-seq data (RNA-Seq) and one round with only Illumina data (RNA-Seq).
+TSEBRA: Merge the results obtained from two separate BRAKER3 runs for a refined gene set.
+Filtering: Remove short and TE-contaminated gene models.
+BUSCO: Assess completeness of genome and gene models.
+LTR Assembly Index (LAI): Assess genome assembly quality.
